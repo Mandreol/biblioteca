@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 
-const useUrlConstructor = (URL_BASE, PARAM) => {
+const useUrlConstructor = (URL_BASE, searchParameter, param) => {
   const [URL, setURL] = useState('');
 
   useEffect(() => {
-    const trimParams = PARAM.trim().replaceAll(' ', '+');
-    const constructedURL = `${URL_BASE}${trimParams}`;
-    setURL(constructedURL);
-  }, [URL_BASE, PARAM]);
+    if (param.length) {
+      const trimParams = param.trim().replaceAll(' ', '+');
+      const constructedURL = `${URL_BASE}${searchParameter}${trimParams}`;
+      setURL(constructedURL);
+    }
+    console.log(URL);
+    return () => setURL('');
+  }, [URL_BASE, param]);
 
   return [URL];
 };
