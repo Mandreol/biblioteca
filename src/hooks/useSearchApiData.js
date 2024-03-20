@@ -1,5 +1,7 @@
-const useSearchApiData = ({ data, param }) => {
-  const dataValue = data?.map((e) => e[param]);
+const useSearchApiData = ({ data }) => {
+  console.log(data);
+  const dataValue = data?.filter((objeto) => 'cover_i' in objeto);
+
   return dataValue;
 };
 

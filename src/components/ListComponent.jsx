@@ -7,8 +7,7 @@ const ListComponent = ({ data, param, handlSetectedInput }) => {
 
   return (
     <li className='list' onClick={handleSelect}>
-      {' '}
-      {data[param]}{' '}
+      {data[param]}
     </li>
   );
 };

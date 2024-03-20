@@ -20,8 +20,8 @@ const useApi = (URL) => {
       } catch (error) {
         setError(
           `Error: ${error.response}, Status: ${
-            error.response.status
-          }, Headers: ${JSON.stringify(error.response.headers)}`
+            error.response
+          }, Headers: ${JSON.stringify(error.response)}`
         );
       } finally {
         setLoading(false);

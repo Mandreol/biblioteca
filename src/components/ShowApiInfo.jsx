@@ -4,6 +4,7 @@ import useUrlConstructor from '../hooks/useUrlConstructor';
 import useApi from '../hooks/useApi';
 import ListComponent from './ListComponent';
 import SuggestionCard from './SuggestionCard';
+import useSearchApiData from '../hooks/useSearchApiData';
 const URL_BASE = 'https://openlibrary.org/';
 
 const ShowApiInfo = () => {
@@ -13,8 +14,8 @@ const ShowApiInfo = () => {
   const [selectedInput, setSelectedInput] = useState();
   const [data, error, loading] = useApi(URL);
   let param = searchParameter === 'search/authors.json?q=' ? 'name' : 'title';
-
-  console.log(selectedInput);
+  let dataFilter = useSearchApiData({ data });
+  console.log(dataFilter);
   return (
     <section
       style={{ width: '100%', height: '100%', backgroundColor: 'green' }}
@@ -22,12 +23,13 @@ const ShowApiInfo = () => {
       <SearchInput
         handleInputValue={SetInputValue}
         handleSearchParameter={setSearchParameter}
+        setSelectedInput={setSelectedInput}
       />
       <p>{URL}</p>
       {loading && <p>cargando</p>}
 
-      <ul>
-        {data?.map((e, i) => (
+      <div className='list-container'>
+        {dataFilter?.map((e, i) => (
           <ListComponent
             key={i}
             data={e}
@@ -36,7 +38,7 @@ const ShowApiInfo = () => {
           />
         ))}
         {selectedInput && <SuggestionCard data={selectedInput} />}
-      </ul>
+      </div>
     </section>
   );
 };

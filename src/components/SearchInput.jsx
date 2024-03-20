@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-const SearchInput = ({ handleInputValue, handleSearchParameter }) => {
+const SearchInput = ({
+  handleInputValue,
+  handleSearchParameter,
+  setSelectedInput,
+}) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleSearchSubmit = () => {
@@ -12,6 +16,7 @@ const SearchInput = ({ handleInputValue, handleSearchParameter }) => {
   };
   const handleSearchParameterValue = (e) => {
     setInputValue('');
+    setSelectedInput(null);
     handleSearchParameter(e.target.value);
     handleSearchSubmit();
   };

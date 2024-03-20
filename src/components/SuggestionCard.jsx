@@ -9,10 +9,11 @@ const SuggestionCard = ({ data }) => {
   console.log(IMG_URL);
   return (
     <div className='book-container'>
-      <div className='book'>
-        <p> dentro </p>
-        <div class='cover' style={{ backgroundImage: `url(${IMG_URL})` }}></div>
-      </div>
+      <div
+        className='cover'
+        style={{ backgroundImage: `url(${IMG_URL})` }}
+      ></div>
+
       <p>{data.title}</p>
     </div>
   );
