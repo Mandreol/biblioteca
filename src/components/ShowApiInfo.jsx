@@ -3,18 +3,17 @@ import SearchInput from './SearchInput';
 import useUrlConstructor from '../hooks/useUrlConstructor';
 import useApi from '../hooks/useApi';
 import useSearchApiData from '../hooks/useSearchApiData';
-const URL_BASE = 'https://openlibrary.org/search.json?';
+const URL_BASE = 'https://openlibrary.org/';
 
 const ShowApiInfo = () => {
   const [inputValue, SetInputValue] = useState('');
-  const [searchParameter, setSearchParameter] = useState('q=');
+  const [searchParameter, setSearchParameter] = useState('search.json?q=');
   const [URL] = useUrlConstructor(URL_BASE, searchParameter, inputValue);
-  const [data] = useApi(URL);
-
+  const [data, error, loading] = useApi(URL);
+  let dataFilterValues = [];
+  console.log(inputValue);
   if (!null && data) {
-    console.log(data.docs.map((e) => e.title));
-    // const [dataValue] = useSearchApiData(data, searchParameter);
-    // console.log(dataValue);
+    dataFilterValues = useSearchApiData({ data, searchParameter });
   }
 
   return (
@@ -26,6 +25,12 @@ const ShowApiInfo = () => {
         handleSearchParameter={setSearchParameter}
       />
       <p>{URL}</p>
+      {loading && <p>cargando</p>}
+      <ul>
+        {dataFilterValues.map((e, i) => (
+          <li key={i}>{e}</li>
+        ))}
+      </ul>
     </section>
   );
 };

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const useApi = (URL) => {
   const [data, setData] = useState();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
   useEffect(() => {

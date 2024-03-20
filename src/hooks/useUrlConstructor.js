@@ -9,7 +9,6 @@ const useUrlConstructor = (URL_BASE, searchParameter, param) => {
       const constructedURL = `${URL_BASE}${searchParameter}${trimParams}`;
       setURL(constructedURL);
     }
-    console.log(URL);
     return () => setURL('');
   }, [URL_BASE, param]);
 

@@ -11,17 +11,19 @@ const SearchInput = ({ handleInputValue, handleSearchParameter }) => {
     setInputValue(e.target.value);
   };
   const handleSearchParameterValue = (e) => {
+    setInputValue('');
     handleSearchParameter(e.target.value);
+    handleSearchSubmit();
   };
 
   return (
     <span>
       <select onChange={handleSearchParameterValue}>
-        <option value={'q='}>busqueda general</option>
-        <option value={'title='}>buscar por título</option>
-        <option value={'author_name='}>buscar por autor</option>
+        <option value={'search.json?q='}>busqueda general</option>
+        <option value={'search.json?title='}>buscar por título</option>
+        <option value={'search/authors.json?q='}>buscar por autor</option>
       </select>
-      <input type='search' onChange={handleInputChange} />
+      <input type='search' onChange={handleInputChange} value={inputValue} />
       <button onClick={handleSearchSubmit}>buscar sugerencias</button>
     </span>
   );
