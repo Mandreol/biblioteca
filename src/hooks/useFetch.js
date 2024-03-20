@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
-const useApi = (URL) => {
+const useFetch = (URL) => {
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
+  const [loading, setLoading] = useState();
 
   useEffect(() => {
     if (!URL) {
-      setError('URL missing');
+      setError('Missing URL');
       return;
     }
 
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(URL);
-        setData(res.data.docs);
+        const res = await fetch(URL);
+        if (!res.ok) {
+          throw new Error('Error with response');
+        }
+        const resData = await res.json();
+        setData(resData);
+        setError(null);
       } catch (error) {
-        setError(
-          `Error: ${error.response}, Status: ${
-            error.response.status
-          }, Headers: ${JSON.stringify(error.response.headers)}`
-        );
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -31,13 +31,11 @@ const useApi = (URL) => {
     fetchData();
 
     return () => {
-      setData(null);
       setError(null);
-      setLoading(false);
     };
   }, [URL]);
 
   return [data, error, loading];
 };
 
-export default useApi;
+export default useFetch;
