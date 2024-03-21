@@ -8,7 +8,7 @@ const useApi = (URL) => {
 
   useEffect(() => {
     if (!URL) {
-      setError('URL missing');
+      setError('debes complectar el campo de busqueda');
       return;
     }
 
@@ -18,11 +18,7 @@ const useApi = (URL) => {
         const res = await axios.get(URL);
         setData(res.data.docs);
       } catch (error) {
-        setError(
-          `Error: ${error.response}, Status: ${
-            error.response
-          }, Headers: ${JSON.stringify(error.response)}`
-        );
+        setError(`Error: ${error}`);
       } finally {
         setLoading(false);
       }
@@ -37,7 +33,7 @@ const useApi = (URL) => {
     };
   }, [URL]);
 
-  return [data, error, loading];
+  return { data, error, loading };
 };
 
 export default useApi;
