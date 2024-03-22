@@ -10,13 +10,13 @@ const SearchBar = ({
   handleFuntion,
 }) => {
   return (
-    <div>
+    <div className='searchBar-container'>
       <InputSelect handleSearchParameterValue={handleSearchParameterValue} />
       <InputSearch
         handleInputChange={handleInputChange}
         inputValue={inputValue}
       />
-      <Buttom text={'Buscar sugerencias'} handleFuntion={handleFuntion} />
+      <Buttom buttontext={'Buscar sugerencias'} handleFuntion={handleFuntion} />
     </div>
   );
 };

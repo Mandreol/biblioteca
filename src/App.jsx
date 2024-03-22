@@ -1,7 +1,8 @@
-import ShowApiInfo from './components/ShowApiInfo';
+import PrincipalLayOut from './components/layOuts/PrincipalLayOut';
+import './styles/resets.css';
 
 function App() {
-  return <ShowApiInfo />;
+  return <PrincipalLayOut />;
 }
 
 export default App;

@@ -1,7 +1,9 @@
-import '../../styles/oranism/SelectedBooksList.css';
+import '../../styles/organism/selectedBooksList.css';
 
 const SelectedBooksList = () => {
-  return <div>SelectedBooksList</div>;
+  return (
+    <section className='selectedBooksList-container'>SelectedBooksList</section>
+  );
 };
 
 export default SelectedBooksList;

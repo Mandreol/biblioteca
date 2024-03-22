@@ -3,7 +3,7 @@ import '../../styles/molecules/suggestionsList.css';
 
 const SuggestionsList = ({ data, param, handlSetectedInput }) => {
   return (
-    <container>
+    <div>
       {data?.map((e, i) => (
         <ListElement
           key={i}
@@ -12,7 +12,7 @@ const SuggestionsList = ({ data, param, handlSetectedInput }) => {
           handlSetectedInput={handlSetectedInput}
         />
       ))}
-    </container>
+    </div>
   );
 };
 

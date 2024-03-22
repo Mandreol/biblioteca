@@ -1,30 +1,40 @@
 import SearchBar from '../molecules/SearchBar';
 import SuggestionCard from '../molecules/SuggestionCard';
-import SuggestionsList from '../molecules/suggestionsList';
-import '../../styles/oranism/BookSearch.css';
+import SuggestionsList from '../molecules/SuggestionsList';
+import '../../styles/organism/booksSearch.css';
+import { useState, useEffect } from 'react';
+import useUrlConstructor from '../../hooks/useUrlConstructor';
+import useSearchApiData from '../../hooks/useSearchApiData';
+import useApi from '../../hooks/useApi';
 
 const BASE_URL = 'https://openlibrary.org/';
 
 const BookSearch = () => {
   const [inputValue, setInputValue] = useState('');
   const [searchParameter, setSearchParameter] = useState('search.json?q=');
-  const [URL] = useUrlConstructor(URL_BASE, searchParameter, inputValue);
+  const [URL] = useUrlConstructor(BASE_URL, searchParameter, inputValue);
   const [selectedInput, setSelectedInput] = useState();
-  const IMG_URL = useUrlConstructor(
-    BASE_URL,
-    'id/',
-    `${selectedInput.cover_i}-L.jpg`
-  );
+  let IMG_URL = '';
+
   let param = searchParameter === 'search/authors.json?q=' ? 'name' : 'title';
-  let dataFilter = useSearchApiData({ data });
+  let dataFilter = useSearchApiData({ inputValue });
 
   function fechtData(URL) {
     return useApi(URL);
   }
   const { data, error, loading } = fechtData(URL);
 
+  useEffect(() => {
+    if (!selectedInput) return;
+    IMG_URL = useUrlConstructor(
+      BASE_URL,
+      'id/',
+      `${selectedInput.cover_i}-L.jpg`
+    );
+  }, []);
+
   return (
-    <section>
+    <section className='bookSearch-container'>
       <SearchBar
         handleSearchParameterValue={setSearchParameter}
         handleInputChange={setInputValue}
@@ -38,12 +48,9 @@ const BookSearch = () => {
         param={param}
         handlSetectedInput={setSelectedInput}
       />
-      <SuggestionCard
-        IMG_URL={IMG_URL}
-        text={text}
-        buttontext={'Agregar a lista de lectura'}
-        handleFuntion
-      />
+      {selectedInput && (
+        <SuggestionCard IMG_URL={IMG_URL} text={selectedInput} />
+      )}
     </section>
   );
 };
