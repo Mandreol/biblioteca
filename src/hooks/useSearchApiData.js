@@ -1,7 +1,7 @@
 const useSearchApiData = ({ data }) => {
-  const dataValue = data?.filter((objeto) => 'cover_i' in objeto);
+  const filterData = data?.filter((objeto) => 'cover_i' in objeto);
 
-  return dataValue;
+  return filterData;
 };
 
 export default useSearchApiData;

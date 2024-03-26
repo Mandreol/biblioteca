@@ -1,9 +1,8 @@
 import { Select } from '@chakra-ui/react';
 
-const InputSelect = ({ inputSelectRef }) => {
+const InputSelect = ({ searchParameter }) => {
   const setParameter = (e) => {
-    inputSelectRef = e.target.value;
-    console.log(inputSelectRef);
+    searchParameter = e.target.value;
   };
   return (
     <Select
@@ -11,7 +10,7 @@ const InputSelect = ({ inputSelectRef }) => {
       size='sm'
       minW={'160px'}
       maxW={'25%'}
-      ref={inputSelectRef}
+      ref={searchParameter}
     >
       <option value={'search.json?q='}>busqueda general</option>
       <option value={'search.json?title='}>buscar por título</option>

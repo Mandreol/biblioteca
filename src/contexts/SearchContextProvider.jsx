@@ -2,16 +2,17 @@ import { createContext, useState, useContext } from 'react';
 export const SearchContext = createContext();
 
 export function SearchContextProvider(props) {
-  const [searchFlag, setSearchState] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('sin errores');
 
   const value = {
-    searchFlag,
     data,
+    setData,
     loading,
+    setLoading,
     error,
+    setError,
   };
 
   return (

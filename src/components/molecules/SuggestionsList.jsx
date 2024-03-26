@@ -1,17 +1,13 @@
 import ListElement from '../atoms/ListElement';
+import { UnorderedList } from '@chakra-ui/react';
 
-const SuggestionsList = ({ data, param, handlSetectedInput }) => {
+const SuggestionsList = ({ filterData, param }) => {
   return (
-    <div>
-      {data?.map((e, i) => (
-        <ListElement
-          key={i}
-          data={e}
-          param={param}
-          handlSetectedInput={handlSetectedInput}
-        />
+    <UnorderedList>
+      {filterData?.map((e, i) => (
+        <ListElement key={i} data={e} param={param} />
       ))}
-    </div>
+    </UnorderedList>
   );
 };
 

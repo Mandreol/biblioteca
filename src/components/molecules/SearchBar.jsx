@@ -4,21 +4,21 @@ import ButtomIO from '../atoms/ButtonIO';
 import { Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 
-const SearchBar = ({ inputSelectRef, inputRef }) => {
+const SearchBar = ({ searchParameter, inputRef, setSearchFlag }) => {
   return (
     <Flex
       as={'span'}
       wrap={'wrap'}
       justifyContent={'center'}
       width={'100%'}
-      h={'20%'}
+      h={'30%'}
       gap={'4px'}
       padding={'2px'}
     >
-      <InputSelect inputSelectRef={inputSelectRef} />
+      <InputSelect searchParameter={searchParameter} />
       <ButtomIO
         buttontext={'Buscar sugerencias'}
-        // handleButtonClick={setSearchState}
+        handleButtonClick={setSearchFlag}
       />
       <InputSearch inputRef={inputRef} />
     </Flex>

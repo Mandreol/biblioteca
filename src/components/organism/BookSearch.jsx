@@ -5,31 +5,49 @@ import { useState, useRef, useEffect } from 'react';
 import useUrlConstructor from '../../hooks/useUrlConstructor';
 import useSearchApiData from '../../hooks/useSearchApiData';
 import useFetch from '../../hooks/useFetch';
-import { Flex } from '@chakra-ui/react';
-import {
-  SearchContextProvider,
-  useSearchContext,
-} from '../../contexts/SearchContextProvider';
+import { Flex, Box } from '@chakra-ui/react';
+import { useSearchContext } from '../../contexts/SearchContextProvider';
 
 const BASE_URL = 'https://openlibrary.org/';
 
 const BookSearch = () => {
+  const [searchFlag, setSearchFlag] = useState(false);
   const inputRef = useRef('');
-  const inputSelectRef = useRef('');
-  const { searchFlag, setSearchState, data, loading, error } =
-    useSearchContext();
-  console.log(searchFlag, setSearchState, data, loading, error);
+  const searchParameter = useRef('');
+  const { data, loading, error } = useSearchContext();
+  const URL = useUrlConstructor(
+    BASE_URL,
+    searchParameter.current.value,
+    inputRef.current.value
+  );
+
+  useFetch(URL);
+  console.log(data);
+  let filterData = null;
+  if (data) {
+    filterData = useSearchApiData({ data });
+  }
+  let param = searchParameter === 'search/authors.json?q=' ? 'name' : 'title';
+
   return (
-    <Flex as='section' border={'1px'} w={'45vw'} h={'42vh'} minW={'300px'}>
+    <Flex
+      as='section'
+      border={'1px'}
+      w={'45vw'}
+      h={'42vh'}
+      minW={'300px'}
+      flexDirection={'column'}
+    >
       <SearchBar
-        inputSelectRef={inputSelectRef}
+        searchParameter={searchParameter}
         inputRef={inputRef}
-        // setSearchState={setSearchState}
+        setSearchFlag={setSearchFlag}
       />
+      <Box w={'100%'} padding={'1rem'} border={'1px'} overflowY={'auto'}>
+        <SuggestionsList filterData={filterData} param={param} />
+      </Box>
     </Flex>
   );
 };
 
 export default BookSearch;
-
-// let param = searchParameter === 'search/authors.json?q=' ? 'name' : 'title';
