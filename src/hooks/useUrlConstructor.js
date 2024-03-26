@@ -10,7 +10,7 @@ const useUrlConstructor = (URL_BASE, searchParameter, param) => {
       setURL(constructedURL);
     }
     return () => setURL('');
-  }, [URL_BASE, param]);
+  }, [URL_BASE, param, searchParameter]);
 
   return [URL];
 };

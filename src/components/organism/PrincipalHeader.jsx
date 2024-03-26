@@ -1,11 +1,17 @@
-import '../../styles/organism/principalHeader.css';
-import Title from '../atoms/Title';
+import HeadingText from '../atoms/HeadingText';
+import { Flex, Spacer } from '@chakra-ui/react';
 
 const PrincipalHeader = () => {
   return (
-    <header>
-      <Title />
-    </header>
+    <Flex
+      justifyContent={'center'}
+      alignItems={'center'}
+      h={'100px'}
+      w={'100%'}
+      as={'header'}
+    >
+      <HeadingText text={'Mi lista de lectura'} />
+    </Flex>
   );
 };
 

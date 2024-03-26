@@ -1,10 +1,19 @@
-import '../../styles/atoms/inputSearch.css';
+import { Input } from '@chakra-ui/react';
 
-const InputSearch = ({ handleInputChange, inputValue }) => {
+const InputSearch = ({ inputRef }) => {
   const handleChange = (e) => {
-    handleInputChange(e.target.value);
+    inputRef = e.target.value;
   };
-  return <input type='search' onChange={handleChange} value={inputValue} />;
+  return (
+    <Input
+      ref={inputRef}
+      type='search'
+      onChange={handleChange}
+      size='sm'
+      w={'100%'}
+      maxW={'250px'}
+    />
+  );
 };
 
 export default InputSearch;

@@ -1,12 +1,22 @@
-import '../../styles/atoms/inputSelect.css';
+import { Select } from '@chakra-ui/react';
 
-const InputSelect = ({ handleSearchParameterValue }) => {
+const InputSelect = ({ inputSelectRef }) => {
+  const setParameter = (e) => {
+    inputSelectRef = e.target.value;
+    console.log(inputSelectRef);
+  };
   return (
-    <select onChange={handleSearchParameterValue}>
+    <Select
+      onChange={setParameter}
+      size='sm'
+      minW={'160px'}
+      maxW={'25%'}
+      ref={inputSelectRef}
+    >
       <option value={'search.json?q='}>busqueda general</option>
       <option value={'search.json?title='}>buscar por título</option>
       <option value={'search/authors.json?q='}>buscar por autor</option>
-    </select>
+    </Select>
   );
 };
 

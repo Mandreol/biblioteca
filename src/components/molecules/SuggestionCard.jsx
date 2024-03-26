@@ -1,7 +1,6 @@
 import Img from '../atoms/Img';
 import Text from '../atoms/Text';
-import Button from '../atoms/Button';
-import '../../styles/molecules/suggestionCard.css';
+import ButtonIO from '../atoms/ButtonIO';
 
 const SuggestionCard = ({ IMG_URL, text }) => {
   function handleFuntion() {
@@ -11,7 +10,7 @@ const SuggestionCard = ({ IMG_URL, text }) => {
     <div>
       <Img IMG_URL={IMG_URL} />
       <Text text={text} />
-      <Button
+      <ButtonIO
         buttontext={'Agregar a lista de lectura'}
         handleFuntion={handleFuntion}
       />

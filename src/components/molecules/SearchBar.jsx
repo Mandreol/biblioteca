@@ -1,23 +1,27 @@
 import InputSelect from '../atoms/InputSelect';
 import InputSearch from '../atoms/InputSearch';
-import Buttom from '../atoms/Button';
-import '../../styles/molecules/searchBar.css';
+import ButtomIO from '../atoms/ButtonIO';
+import { Flex } from '@chakra-ui/react';
+import { useState } from 'react';
 
-const SearchBar = ({
-  handleSearchParameterValue,
-  handleInputChange,
-  inputValue,
-  handleFuntion,
-}) => {
+const SearchBar = ({ inputSelectRef, inputRef }) => {
   return (
-    <div className='searchBar-container'>
-      <InputSelect handleSearchParameterValue={handleSearchParameterValue} />
-      <InputSearch
-        handleInputChange={handleInputChange}
-        inputValue={inputValue}
+    <Flex
+      as={'span'}
+      wrap={'wrap'}
+      justifyContent={'center'}
+      width={'100%'}
+      h={'20%'}
+      gap={'4px'}
+      padding={'2px'}
+    >
+      <InputSelect inputSelectRef={inputSelectRef} />
+      <ButtomIO
+        buttontext={'Buscar sugerencias'}
+        // handleButtonClick={setSearchState}
       />
-      <Buttom buttontext={'Buscar sugerencias'} handleFuntion={handleFuntion} />
-    </div>
+      <InputSearch inputRef={inputRef} />
+    </Flex>
   );
 };
 export default SearchBar;

@@ -1,5 +1,4 @@
 import ListElement from '../atoms/ListElement';
-import '../../styles/molecules/suggestionsList.css';
 
 const SuggestionsList = ({ data, param, handlSetectedInput }) => {
   return (

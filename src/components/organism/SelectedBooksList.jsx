@@ -1,8 +1,9 @@
-import '../../styles/organism/selectedBooksList.css';
-
+import { Flex } from '@chakra-ui/react';
 const SelectedBooksList = () => {
   return (
-    <section className='selectedBooksList-container'>SelectedBooksList</section>
+    <Flex as='section' border={'1px'} w={'45vw'} h={'42vh'} minW={'300px'}>
+      SelectedBooksList
+    </Flex>
   );
 };
 
