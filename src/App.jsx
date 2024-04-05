@@ -11,6 +11,7 @@ function App() {
         backgroundColor={'grey'}
         h={'100vh'}
         maxW='100vw'
+        overflowY={'auto'}
       >
         <PrincipalLayOut />
       </Container>

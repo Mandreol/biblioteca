@@ -8,26 +8,20 @@ import useFetch from '../../hooks/useFetch';
 import { Flex, Box } from '@chakra-ui/react';
 import { useSearchContext } from '../../contexts/SearchContextProvider';
 
-const BASE_URL = 'https://openlibrary.org/';
+const BASE_URL = 'https://openlibrary.org/search.json?q=';
 
 const BookSearch = () => {
   const [searchFlag, setSearchFlag] = useState(false);
   const inputRef = useRef('');
-  const searchParameter = useRef('');
   const { data, loading, error } = useSearchContext();
-  const URL = useUrlConstructor(
-    BASE_URL,
-    searchParameter.current.value,
-    inputRef.current.value
-  );
-
+  const URL = useUrlConstructor(BASE_URL, inputRef.current.value);
+  console.log(URL);
   useFetch(URL);
-  console.log(data);
+
   let filterData = null;
   if (data) {
     filterData = useSearchApiData({ data });
   }
-  let param = searchParameter === 'search/authors.json?q=' ? 'name' : 'title';
 
   return (
     <Flex
@@ -36,15 +30,13 @@ const BookSearch = () => {
       w={'45vw'}
       h={'42vh'}
       minW={'300px'}
+      gap={'0.5rem'}
       flexDirection={'column'}
+      padding={'0.5rem'}
     >
-      <SearchBar
-        searchParameter={searchParameter}
-        inputRef={inputRef}
-        setSearchFlag={setSearchFlag}
-      />
+      <SearchBar inputRef={inputRef} setSearchFlag={setSearchFlag} />
       <Box w={'100%'} padding={'1rem'} border={'1px'} overflowY={'auto'}>
-        <SuggestionsList filterData={filterData} param={param} />
+        <SuggestionsList filterData={filterData} />
       </Box>
     </Flex>
   );

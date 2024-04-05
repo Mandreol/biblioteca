@@ -1,6 +1,6 @@
 import Img from '../atoms/Img';
 import Text from '../atoms/Text';
-import ButtonIO from '../atoms/ButtonIO';
+import ButtonIO from '../atoms/ButtonSearch';
 
 const SuggestionCard = ({ IMG_URL, text }) => {
   function handleFuntion() {

@@ -10,8 +10,7 @@ const InputSearch = ({ inputRef }) => {
       type='search'
       onChange={handleChange}
       size='sm'
-      w={'100%'}
-      maxW={'250px'}
+      maxW={'300px'}
     />
   );
 };
