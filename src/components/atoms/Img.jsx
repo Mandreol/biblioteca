@@ -1,5 +1,5 @@
 const Img = ({ IMG_URL }) => {
-  return <img src={IMG_URL}></img>;
+  return <img width={'50%'} src={IMG_URL}></img>;
 };
 
 export default Img;

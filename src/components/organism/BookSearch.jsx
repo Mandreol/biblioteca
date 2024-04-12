@@ -7,22 +7,29 @@ import useSearchApiData from '../../hooks/useSearchApiData';
 import useFetch from '../../hooks/useFetch';
 import { Flex, Box } from '@chakra-ui/react';
 import { useSearchContext } from '../../contexts/SearchContextProvider';
+import { useDisclosure } from '@chakra-ui/react-use-disclosure';
 
 const BASE_URL = 'https://openlibrary.org/search.json?q=';
 
 const BookSearch = () => {
   const [searchFlag, setSearchFlag] = useState(false);
+  const [selectData, setSelectData] = useState(false);
   const inputRef = useRef('');
-  const { data, loading, error } = useSearchContext();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const URL = useUrlConstructor(BASE_URL, inputRef.current.value);
-  console.log(URL);
-  useFetch(URL);
+  const { data, error, loading } = useFetch(URL);
 
   let filterData = null;
+
   if (data) {
     filterData = useSearchApiData({ data });
   }
 
+  function listAcction(data) {
+    onOpen();
+    setSelectData(data);
+  }
+  console.log(selectData);
   return (
     <Flex
       as='section'
@@ -36,8 +43,13 @@ const BookSearch = () => {
     >
       <SearchBar inputRef={inputRef} setSearchFlag={setSearchFlag} />
       <Box w={'100%'} padding={'1rem'} border={'1px'} overflowY={'auto'}>
-        <SuggestionsList filterData={filterData} />
+        <SuggestionsList filterData={filterData} accion={listAcction} />
       </Box>
+      <SuggestionCard
+        selectData={selectData}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </Flex>
   );
 };

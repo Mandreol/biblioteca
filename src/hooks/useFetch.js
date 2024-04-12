@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSearchContext } from '../contexts/SearchContextProvider';
 
 const useFetch = (URL) => {
-  const { data, setData, loading, setLoading, error, setError } =
-    useSearchContext();
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!URL) {
-      setError('debes complectar el campo de busqueda');
+      setError('Debes completar el campo de búsqueda');
       return;
     }
 
@@ -18,7 +18,7 @@ const useFetch = (URL) => {
         const res = await axios.get(URL);
         setData(res.data.docs);
       } catch (error) {
-        setError(`Error: ${error}`);
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -32,6 +32,8 @@ const useFetch = (URL) => {
       setLoading(false);
     };
   }, [URL]);
+
+  return { data, error, loading };
 };
 
 export default useFetch;

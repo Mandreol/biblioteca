@@ -2,17 +2,22 @@ import { createContext, useState, useContext } from 'react';
 export const SearchContext = createContext();
 
 export function SearchContextProvider(props) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('sin errores');
+  const [books, setBooks] = useState([]);
+
+  const addBook = (newBook) => {
+    setBooks([...books, newBook]);
+  };
+
+  const removeBook = (index) => {
+    const updatedBooks = [...books];
+    updatedBooks.splice(index, 1);
+    setBooks(updatedBooks);
+  };
 
   const value = {
-    data,
-    setData,
-    loading,
-    setLoading,
-    error,
-    setError,
+    books,
+    addBook,
+    removeBook,
   };
 
   return (
