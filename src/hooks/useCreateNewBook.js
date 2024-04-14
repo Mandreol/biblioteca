@@ -8,7 +8,7 @@ const useCreateNewBook = () => {
   function createNewBook(bookData) {
     const book = {
       title: bookData.title,
-      author: bookData.author_name[0],
+      author: bookData?.author_name[0],
       imgUrl: `https://covers.openlibrary.org/b/id/${bookData.cover_i}-L.jpg`,
       recommendationDate: currentDate,
       state: 'to read',

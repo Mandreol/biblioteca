@@ -29,7 +29,7 @@ const BookSearch = () => {
     onOpen();
     setSelectData(data);
   }
-  console.log(selectData);
+
   return (
     <Flex
       as='section'

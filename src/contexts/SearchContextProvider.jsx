@@ -13,11 +13,23 @@ export function SearchContextProvider(props) {
     updatedBooks.splice(index, 1);
     setBooks(updatedBooks);
   };
-
+  const changeState = (index) => {
+    const initializationDate = new Date();
+    setBooks((prevBooks) => {
+      const updatedBooks = [...prevBooks];
+      updatedBooks[index] = {
+        ...updatedBooks[index],
+        state: updatedBooks[index].state === 'to read' ? 'reading' : 'read',
+        initializationDate: initializationDate,
+      };
+      return updatedBooks;
+    });
+  };
   const value = {
     books,
     addBook,
     removeBook,
+    changeState,
   };
 
   return (
