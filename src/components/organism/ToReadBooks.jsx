@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react';
 import { useSearchContext } from '../../contexts/SearchContextProvider';
 import ToReadCardSlider from '../molecules/ToReadCardSlider';
 
-const SelectedBooksList = () => {
+const ToReadBooks = () => {
   const { books, removeBook, changeState } = useSearchContext();
   const toReadBooks = books.filter((book) => book.state === 'to read');
   return (
@@ -25,4 +25,4 @@ const SelectedBooksList = () => {
   );
 };
 
-export default SelectedBooksList;
+export default ToReadBooks;

@@ -7,7 +7,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react';
-
+import { AttachmentIcon } from '@chakra-ui/icons';
 const Arrow = ({ direction, onClick }) => (
   <Box
     fontSize='45px'
@@ -36,18 +36,20 @@ const Dot = ({ active, onClick }) => (
   </Box>
 );
 
-const ReadingCardSlider = ({ books, changeState }) => {
-  console.log(books);
+const ReadingCardSlider = ({ books, changeState, setPages }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [pagesValue, setPagesValue] = useState(books[currentIndex].pagesRead);
   const goToPrevious = () => {
     const newIndex = currentIndex === 0 ? books.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
+    setPagesValue(books[newIndex].pagesRead);
   };
 
   const goToNext = () => {
     const newIndex = currentIndex === books.length - 1 ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
+    setPagesValue(books[newIndex].pagesRead);
   };
 
   const goToSlide = (index) => {
@@ -57,11 +59,16 @@ const ReadingCardSlider = ({ books, changeState }) => {
     changeState(books[currentIndex]?.id);
     setCurrentIndex(0);
   };
+  const handleSetPages = (e) => {
+    console.log(e);
+    setPages(e, books[currentIndex].id);
+    setPagesValue(e);
+  };
 
   const slideStylesWidthBackground = books[currentIndex]?.imgUrl;
   const bookTitle = books[currentIndex]?.title;
   const recommendationDate = books[currentIndex]?.recommendationDate;
-  const pagesRead = books[currentIndex]?.pagesRead;
+  const pagesRead = books[currentIndex].pagesRead;
   const startDate = books[currentIndex]?.startDate;
 
   return (
@@ -74,17 +81,27 @@ const ReadingCardSlider = ({ books, changeState }) => {
           backgroundSize={'contain'}
           backgroundPosition={'center'}
           backgroundRepeat={'no-repeat'}
-        ></Box>
-        <Flex h={'95%'} direction={'column'} justifyContent={'space-between'}>
-          <Text wordBreak={'break-word'}>
-            {bookTitle}
-            <br /> recomendado el: {recommendationDate}
-          </Text>
+        >
+          <AttachmentIcon boxSize={8} cursor={'pointer'} />
+        </Box>
+        <Flex
+          h={'95%'}
+          w={'50%'}
+          padding={'5px'}
+          direction={'column'}
+          justifyContent={'space-between'}
+        >
+          <Text wordBreak={'break-word'}>{bookTitle}</Text>
           <Text wordBreak={'break-word'}>Iniciado el: {startDate}</Text>
           <Flex justifyContent={'space-between'}>
-            paginas leidas:
+            pagina:
             {
-              <NumberInput w={'65px'} size='xs' defaultValue={pagesRead}>
+              <NumberInput
+                w={'65px'}
+                size='xs'
+                onChange={handleSetPages}
+                value={pagesValue}
+              >
                 <NumberInputField />
                 <NumberInputStepper>
                   <NumberIncrementStepper />

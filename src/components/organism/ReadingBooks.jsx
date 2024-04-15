@@ -1,9 +1,11 @@
 import { Flex } from '@chakra-ui/react';
 import { useSearchContext } from '../../contexts/SearchContextProvider';
 import ReadingCardSlider from '../molecules/ReadingCardSlider';
+import { useState } from 'react';
 
 const ReadingBooks = () => {
-  const { books, removeBook, changeState } = useSearchContext();
+  const { books, removeBook, changeState, setPages } = useSearchContext();
+  const [pagesValue, setPagesValue] = useState();
   const readingBooks = books.filter((book) => book.state === 'reading');
 
   return (
@@ -17,7 +19,11 @@ const ReadingBooks = () => {
       alignItems={'center'}
     >
       {readingBooks.length > 0 ? (
-        <ReadingCardSlider books={readingBooks} changeState={changeState} />
+        <ReadingCardSlider
+          books={readingBooks}
+          changeState={changeState}
+          setPages={setPages}
+        />
       ) : (
         'No estás leyendo nada en este momento'
       )}

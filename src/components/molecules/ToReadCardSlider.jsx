@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Flex, Text, Box, Button } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
+import { Flex, Text, Box, Button, Tooltip } from '@chakra-ui/react';
+import { AttachmentIcon } from '@chakra-ui/icons';
+import NotesPanel from '../molecules/NotesPanel';
+import { useDisclosure } from '@chakra-ui/react';
 
 const Arrow = ({ direction, onClick }) => (
   <Box
@@ -31,6 +33,7 @@ const Dot = ({ active, onClick }) => (
 );
 
 const ToReadCardSlider = ({ books, changeState }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -65,17 +68,27 @@ const ToReadCardSlider = ({ books, changeState }) => {
           backgroundSize={'contain'}
           backgroundPosition={'center'}
           backgroundRepeat={'no-repeat'}
-        ></Box>
+        >
+          <Tooltip label='Anotaciones' fontSize='md'>
+            <AttachmentIcon
+              boxSize={8}
+              cursor={'pointer'}
+              _hover={{ color: 'black' }}
+              onClick={onOpen}
+            />
+          </Tooltip>
+        </Box>
         <Flex
           h={'95%'}
           w={'50%'}
           direction={'column'}
           justifyContent={'space-between'}
-          alignItems={'center'}
+          alignItems={'flex-start'}
         >
           <Text wordBreak={'break-word'}>
-            {bookTitle} <br />
-            Recomendado el: {recommendationDate}
+            {bookTitle}
+            <br />
+            Recomendado el: {recommendationDate}{' '}
           </Text>
 
           <Button
@@ -98,6 +111,7 @@ const ToReadCardSlider = ({ books, changeState }) => {
           />
         ))}
       </Flex>
+      <NotesPanel isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };

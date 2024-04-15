@@ -28,11 +28,24 @@ export function SearchContextProvider(props) {
       return updatedBooks;
     });
   };
+  const setPages = (value, id) => {
+    setBooks((prevBooks) => {
+      const updatedBooks = [...prevBooks];
+      const index = updatedBooks.findIndex((e) => e.id === id);
+      updatedBooks[index] = {
+        ...updatedBooks[index],
+        pagesRead: value,
+      };
+
+      return updatedBooks;
+    });
+  };
   const value = {
     books,
     addBook,
     removeBook,
     changeState,
+    setPages,
   };
 
   return (

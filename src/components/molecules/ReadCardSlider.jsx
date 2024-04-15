@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Flex, Text, Box, Button } from '@chakra-ui/react';
-
+import { AttachmentIcon } from '@chakra-ui/icons';
 const Arrow = ({ direction, onClick }) => (
   <Box
     fontSize='45px'
@@ -29,7 +29,7 @@ const Dot = ({ active, onClick }) => (
   </Box>
 );
 
-const ReadCardSlider = ({ books, changeState }) => {
+const ReadCardSlider = ({ books }) => {
   console.log(books);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -62,7 +62,13 @@ const ReadCardSlider = ({ books, changeState }) => {
           backgroundSize={'contain'}
           backgroundPosition={'center'}
           backgroundRepeat={'no-repeat'}
-        ></Box>
+        >
+          <AttachmentIcon
+            boxSize={8}
+            cursor={'pointer'}
+            _hover={{ color: 'red' }}
+          />
+        </Box>
         <Flex h={'95%'} direction={'column'} justifyContent={'space-evenly'}>
           <Text>{bookTitle}</Text>
           <Text wordBreak={'break-word'}>

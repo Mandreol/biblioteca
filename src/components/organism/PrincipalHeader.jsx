@@ -6,7 +6,7 @@ const PrincipalHeader = () => {
     <Flex
       justifyContent={'center'}
       alignItems={'center'}
-      h={'100px'}
+      h={'50px'}
       w={'100%'}
       as={'header'}
     >
