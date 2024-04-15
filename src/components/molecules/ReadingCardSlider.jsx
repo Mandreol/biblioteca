@@ -65,9 +65,16 @@ const ReadingCardSlider = ({ books, changeState }) => {
   const startDate = books[currentIndex]?.startDate;
 
   return (
-    <Flex h={'95%'} direction={'column'}>
-      <Flex w={'44vw'} h={'100%'} justifyContent='space-between'>
+    <Flex h={'95%'} w={'100%'} direction={'column'}>
+      <Flex h={'100%'} w={'100%'} justifyContent={'space-evenly'}>
         <Arrow direction='left' onClick={goToPrevious} />
+        <Box
+          width={'50%'}
+          backgroundImage={`url(${slideStylesWidthBackground})`}
+          backgroundSize={'contain'}
+          backgroundPosition={'center'}
+          backgroundRepeat={'no-repeat'}
+        ></Box>
         <Flex h={'95%'} direction={'column'} justifyContent={'space-between'}>
           <Text wordBreak={'break-word'}>
             {bookTitle}
@@ -87,15 +94,11 @@ const ReadingCardSlider = ({ books, changeState }) => {
             }
           </Flex>
 
-          <Button onClick={changeBookState}>libro terminado!!!</Button>
+          <Button w={'140px'} onClick={changeBookState}>
+            libro terminado!!!
+          </Button>
         </Flex>
-        <Box
-          width={'130px'}
-          backgroundImage={`url(${slideStylesWidthBackground})`}
-          backgroundSize={'contain'}
-          backgroundPosition={'center'}
-          backgroundRepeat={'no-repeat'}
-        ></Box>
+
         <Arrow direction='right' onClick={goToNext} />
       </Flex>
       <Flex justifyContent='center'>

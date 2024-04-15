@@ -12,7 +12,7 @@ const SearchBar = ({ inputRef, setSearchFlag }) => {
       gap={'4px'}
       padding={'2px'}
     >
-      <InputSearch inputRef={inputRef} />
+      <InputSearch inputRef={inputRef} setFlag={setSearchFlag} />
       <ButtonSearch
         buttontext={'Buscar sugerencias'}
         handleButtonClick={setSearchFlag}

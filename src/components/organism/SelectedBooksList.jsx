@@ -5,7 +5,6 @@ import ToReadCardSlider from '../molecules/ToReadCardSlider';
 const SelectedBooksList = () => {
   const { books, removeBook, changeState } = useSearchContext();
   const toReadBooks = books.filter((book) => book.state === 'to read');
-  console.log(books);
   return (
     <Flex
       as='section'
@@ -15,6 +14,7 @@ const SelectedBooksList = () => {
       minW={'300px'}
       justify={'center'}
       alignItems={'center'}
+      position={'relative'}
     >
       {toReadBooks.length > 0 ? (
         <ToReadCardSlider books={toReadBooks} changeState={changeState} />

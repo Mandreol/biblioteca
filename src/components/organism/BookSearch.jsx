@@ -6,7 +6,6 @@ import useUrlConstructor from '../../hooks/useUrlConstructor';
 import useSearchApiData from '../../hooks/useSearchApiData';
 import useFetch from '../../hooks/useFetch';
 import { Flex, Box, Text, CircularProgress } from '@chakra-ui/react';
-import { useSearchContext } from '../../contexts/SearchContextProvider';
 import { useDisclosure } from '@chakra-ui/react-use-disclosure';
 
 const BASE_URL = 'https://openlibrary.org/search.json?q=';
@@ -29,7 +28,7 @@ const BookSearch = () => {
     onOpen();
     setSelectData(data);
   }
-  console.log(loading);
+
   return (
     <Flex
       as='section'
@@ -57,7 +56,7 @@ const BookSearch = () => {
         />
       ) : (
         <Text textAlign={'center'} justifySelf={'center'}>
-          Ingrsa el nombre del libro que deseas buscar
+          Ingresa el nombre del libro que deseas buscar
         </Text>
       )}
       <SuggestionCard

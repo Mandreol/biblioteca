@@ -53,17 +53,9 @@ const ReadCardSlider = ({ books, changeState }) => {
   const startDate = books[currentIndex]?.startDate;
   const finishDate = books[currentIndex]?.finishDate;
   return (
-    <Flex h={'95%'} direction={'column'}>
-      <Flex w={'44vw'} h={'100%'} justifyContent='space-between'>
+    <Flex h={'95%'} w={'100%'} direction={'column'}>
+      <Flex h={'100%'} w={'100%'} justifyContent={'space-evenly'}>
         <Arrow direction='left' onClick={goToPrevious} />
-        <Flex h={'95%'} direction={'column'}>
-          <Text>{bookTitle}</Text>
-          <Text wordBreak={'break-word'}>
-            recomendado el: {recommendationDate}
-          </Text>
-          <Text wordBreak={'break-word'}>Iniciado el: {startDate}</Text>
-          <Text wordBreak={'break-word'}>Terminado el: {finishDate}</Text>
-        </Flex>
         <Box
           width={'130px'}
           backgroundImage={`url(${slideStylesWidthBackground})`}
@@ -71,6 +63,15 @@ const ReadCardSlider = ({ books, changeState }) => {
           backgroundPosition={'center'}
           backgroundRepeat={'no-repeat'}
         ></Box>
+        <Flex h={'95%'} direction={'column'} justifyContent={'space-evenly'}>
+          <Text>{bookTitle}</Text>
+          <Text wordBreak={'break-word'}>
+            recomendado el: {recommendationDate}
+          </Text>
+          <Text wordBreak={'break-word'}>Iniciado el: {startDate}</Text>
+          <Text wordBreak={'break-word'}>Terminado el: {finishDate}</Text>
+        </Flex>
+
         <Arrow direction='right' onClick={goToNext} />
       </Flex>
       <Flex justifyContent='center'>

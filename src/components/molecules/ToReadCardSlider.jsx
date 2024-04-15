@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Flex, Text, Box, Button } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 const Arrow = ({ direction, onClick }) => (
   <Box
@@ -30,7 +31,6 @@ const Dot = ({ active, onClick }) => (
 );
 
 const ToReadCardSlider = ({ books, changeState }) => {
-  console.log(books);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -56,14 +56,22 @@ const ToReadCardSlider = ({ books, changeState }) => {
   const recommendationDate = books[currentIndex]?.recommendationDate;
 
   return (
-    <Flex h={'95%'} direction={'column'}>
-      <Flex w={'44vw'} h={'100%'} justifyContent='space-between'>
+    <Flex h={'95%'} w={'100%'} direction={'column'}>
+      <Flex h={'100%'} w={'100%'} justifyContent={'space-evenly'}>
         <Arrow direction='left' onClick={goToPrevious} />
+        <Box
+          width={'40%'}
+          backgroundImage={`url(${slideStylesWidthBackground})`}
+          backgroundSize={'contain'}
+          backgroundPosition={'center'}
+          backgroundRepeat={'no-repeat'}
+        ></Box>
         <Flex
           h={'95%'}
           w={'50%'}
           direction={'column'}
           justifyContent={'space-between'}
+          alignItems={'center'}
         >
           <Text wordBreak={'break-word'}>
             {bookTitle} <br />
@@ -72,19 +80,13 @@ const ToReadCardSlider = ({ books, changeState }) => {
 
           <Button
             justifySelf={'flex-end'}
-            w={'150px'}
+            w={'130px'}
             onClick={changeBookState}
           >
             Comenzar a leer
           </Button>
         </Flex>
-        <Box
-          width={'130px'}
-          backgroundImage={`url(${slideStylesWidthBackground})`}
-          backgroundSize={'contain'}
-          backgroundPosition={'center'}
-          backgroundRepeat={'no-repeat'}
-        ></Box>
+
         <Arrow direction='right' onClick={goToNext} />
       </Flex>
       <Flex justifyContent='center'>
