@@ -47,7 +47,8 @@ const ToReadCardSlider = ({ books, changeState }) => {
     setCurrentIndex(index);
   };
   const changeBookState = () => {
-    changeState(books[currentIndex]);
+    changeState(books[currentIndex].id);
+    setCurrentIndex(0);
   };
 
   const slideStylesWidthBackground = books[currentIndex]?.imgUrl;
@@ -58,12 +59,24 @@ const ToReadCardSlider = ({ books, changeState }) => {
     <Flex h={'95%'} direction={'column'}>
       <Flex w={'44vw'} h={'100%'} justifyContent='space-between'>
         <Arrow direction='left' onClick={goToPrevious} />
-        <Flex h={'95%'} direction={'column'}>
-          <Text>{bookTitle}</Text>
+        <Flex
+          h={'95%'}
+          w={'50%'}
+          direction={'column'}
+          justifyContent={'space-between'}
+        >
           <Text wordBreak={'break-word'}>
-            recomendado el: {recommendationDate}
+            {bookTitle} <br />
+            Recomendado el: {recommendationDate}
           </Text>
-          <Button onClick={changeBookState}>Comenzar a leer</Button>
+
+          <Button
+            justifySelf={'flex-end'}
+            w={'150px'}
+            onClick={changeBookState}
+          >
+            Comenzar a leer
+          </Button>
         </Flex>
         <Box
           width={'130px'}

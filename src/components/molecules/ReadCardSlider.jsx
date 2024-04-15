@@ -1,12 +1,5 @@
 import { useState } from 'react';
 import { Flex, Text, Box, Button } from '@chakra-ui/react';
-import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-} from '@chakra-ui/react';
 
 const Arrow = ({ direction, onClick }) => (
   <Box
@@ -36,7 +29,7 @@ const Dot = ({ active, onClick }) => (
   </Box>
 );
 
-const ReadingCardSlider = ({ books, changeState }) => {
+const ReadCardSlider = ({ books, changeState }) => {
   console.log(books);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -53,41 +46,23 @@ const ReadingCardSlider = ({ books, changeState }) => {
   const goToSlide = (index) => {
     setCurrentIndex(index);
   };
-  const changeBookState = () => {
-    changeState(books[currentIndex]?.id);
-    setCurrentIndex(0);
-  };
 
   const slideStylesWidthBackground = books[currentIndex]?.imgUrl;
   const bookTitle = books[currentIndex]?.title;
   const recommendationDate = books[currentIndex]?.recommendationDate;
-  const pagesRead = books[currentIndex]?.pagesRead;
   const startDate = books[currentIndex]?.startDate;
-
+  const finishDate = books[currentIndex]?.finishDate;
   return (
     <Flex h={'95%'} direction={'column'}>
       <Flex w={'44vw'} h={'100%'} justifyContent='space-between'>
         <Arrow direction='left' onClick={goToPrevious} />
-        <Flex h={'95%'} direction={'column'} justifyContent={'space-between'}>
+        <Flex h={'95%'} direction={'column'}>
+          <Text>{bookTitle}</Text>
           <Text wordBreak={'break-word'}>
-            {bookTitle}
-            <br /> recomendado el: {recommendationDate}
+            recomendado el: {recommendationDate}
           </Text>
           <Text wordBreak={'break-word'}>Iniciado el: {startDate}</Text>
-          <Flex justifyContent={'space-between'}>
-            paginas leidas:
-            {
-              <NumberInput w={'65px'} size='xs' defaultValue={pagesRead}>
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-            }
-          </Flex>
-
-          <Button onClick={changeBookState}>libro terminado!!!</Button>
+          <Text wordBreak={'break-word'}>Terminado el: {finishDate}</Text>
         </Flex>
         <Box
           width={'130px'}
@@ -111,4 +86,4 @@ const ReadingCardSlider = ({ books, changeState }) => {
   );
 };
 
-export default ReadingCardSlider;
+export default ReadCardSlider;

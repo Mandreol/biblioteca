@@ -1,9 +1,10 @@
 import { createContext, useState, useContext } from 'react';
 export const SearchContext = createContext();
+import useCurrentDate from '../hooks/useCurrentDate';
 
 export function SearchContextProvider(props) {
   const [books, setBooks] = useState([]);
-
+  const { currentDate } = useCurrentDate();
   const addBook = (newBook) => {
     setBooks([...books, newBook]);
   };
@@ -13,14 +14,16 @@ export function SearchContextProvider(props) {
     updatedBooks.splice(index, 1);
     setBooks(updatedBooks);
   };
-  const changeState = (index) => {
-    const initializationDate = new Date();
+  const changeState = (id) => {
+    const startDate = currentDate;
     setBooks((prevBooks) => {
       const updatedBooks = [...prevBooks];
+      const index = updatedBooks.findIndex((e) => e.id === id);
       updatedBooks[index] = {
         ...updatedBooks[index],
         state: updatedBooks[index].state === 'to read' ? 'reading' : 'read',
-        initializationDate: initializationDate,
+        startDate: startDate,
+        finishDate: updatedBooks[index].state === 'reading' ? currentDate : '',
       };
       return updatedBooks;
     });

@@ -16,7 +16,11 @@ const SelectedBooksList = () => {
       justify={'center'}
       alignItems={'center'}
     >
-      <ToReadCardSlider books={toReadBooks} changeState={changeState} />
+      {toReadBooks.length > 0 ? (
+        <ToReadCardSlider books={toReadBooks} changeState={changeState} />
+      ) : (
+        'No tienes ningun libro en la lista'
+      )}
     </Flex>
   );
 };

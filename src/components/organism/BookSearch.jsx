@@ -1,11 +1,11 @@
 import SearchBar from '../molecules/SearchBar';
 import SuggestionCard from '../molecules/SuggestionCard';
 import SuggestionsList from '../molecules/SuggestionsList';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import useUrlConstructor from '../../hooks/useUrlConstructor';
 import useSearchApiData from '../../hooks/useSearchApiData';
 import useFetch from '../../hooks/useFetch';
-import { Flex, Box } from '@chakra-ui/react';
+import { Flex, Box, Text, CircularProgress } from '@chakra-ui/react';
 import { useSearchContext } from '../../contexts/SearchContextProvider';
 import { useDisclosure } from '@chakra-ui/react-use-disclosure';
 
@@ -29,7 +29,7 @@ const BookSearch = () => {
     onOpen();
     setSelectData(data);
   }
-
+  console.log(loading);
   return (
     <Flex
       as='section'
@@ -42,9 +42,24 @@ const BookSearch = () => {
       padding={'0.5rem'}
     >
       <SearchBar inputRef={inputRef} setSearchFlag={setSearchFlag} />
-      <Box w={'100%'} padding={'1rem'} border={'1px'} overflowY={'auto'}>
-        <SuggestionsList filterData={filterData} accion={listAcction} />
-      </Box>
+
+      {filterData ? (
+        <Box w={'100%'} padding={'1rem'} border={'1px'} overflowY={'auto'}>
+          {' '}
+          <SuggestionsList filterData={filterData} accion={listAcction} />{' '}
+        </Box>
+      ) : loading ? (
+        <CircularProgress
+          alignSelf={'center'}
+          justifySelf={'center'}
+          isIndeterminate
+          color='green.300'
+        />
+      ) : (
+        <Text textAlign={'center'} justifySelf={'center'}>
+          Ingrsa el nombre del libro que deseas buscar
+        </Text>
+      )}
       <SuggestionCard
         selectData={selectData}
         isOpen={isOpen}
