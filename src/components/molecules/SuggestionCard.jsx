@@ -1,6 +1,4 @@
 import Img from '../atoms/Img';
-import Text from '../atoms/Text';
-import ButtonIO from '../atoms/ButtonSearch';
 import useCreateNewBook from '../../hooks/useCreateNewBook';
 import {
   Modal,

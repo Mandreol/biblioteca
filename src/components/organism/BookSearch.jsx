@@ -53,6 +53,7 @@ const BookSearch = () => {
           justifySelf={'center'}
           isIndeterminate
           color='green.300'
+          marginTop={'10%'}
         />
       ) : (
         <Text textAlign={'center'} justifySelf={'center'}>

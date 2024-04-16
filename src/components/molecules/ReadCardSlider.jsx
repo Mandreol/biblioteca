@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Flex, Text, Box, Button } from '@chakra-ui/react';
+import { Flex, Text, Box, Tooltip } from '@chakra-ui/react';
 import { AttachmentIcon } from '@chakra-ui/icons';
+import NotesPanel from '../molecules/NotesPanel';
+import { useDisclosure } from '@chakra-ui/react';
 const Arrow = ({ direction, onClick }) => (
   <Box
     fontSize='45px'
@@ -30,7 +32,7 @@ const Dot = ({ active, onClick }) => (
 );
 
 const ReadCardSlider = ({ books }) => {
-  console.log(books);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -63,11 +65,14 @@ const ReadCardSlider = ({ books }) => {
           backgroundPosition={'center'}
           backgroundRepeat={'no-repeat'}
         >
-          <AttachmentIcon
-            boxSize={8}
-            cursor={'pointer'}
-            _hover={{ color: 'red' }}
-          />
+          <Tooltip label='Anotaciones' fontSize='md'>
+            <AttachmentIcon
+              boxSize={8}
+              cursor={'pointer'}
+              _hover={{ color: 'black' }}
+              onClick={onOpen}
+            />
+          </Tooltip>
         </Box>
         <Flex h={'95%'} direction={'column'} justifyContent={'space-evenly'}>
           <Text>{bookTitle}</Text>
@@ -89,6 +94,12 @@ const ReadCardSlider = ({ books }) => {
           />
         ))}
       </Flex>
+      <NotesPanel
+        isOpen={isOpen}
+        onClose={onClose}
+        notes={books[currentIndex].notes}
+        bookId={books[currentIndex].id}
+      />
     </Flex>
   );
 };

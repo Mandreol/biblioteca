@@ -16,7 +16,7 @@ const ReadBooks = () => {
       alignItems={'center'}
     >
       {readBooks.length > 0 ? (
-        <ReadCardSlider books={readBooks} changeState={changeState} />
+        <ReadCardSlider books={readBooks} />
       ) : (
         'Aun no terminas un libro'
       )}

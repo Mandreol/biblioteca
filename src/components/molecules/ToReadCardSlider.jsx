@@ -111,7 +111,12 @@ const ToReadCardSlider = ({ books, changeState }) => {
           />
         ))}
       </Flex>
-      <NotesPanel isOpen={isOpen} onClose={onClose} />
+      <NotesPanel
+        isOpen={isOpen}
+        onClose={onClose}
+        notes={books[currentIndex].notes}
+        bookId={books[currentIndex].id}
+      />
     </Flex>
   );
 };

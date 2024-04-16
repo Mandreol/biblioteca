@@ -16,7 +16,7 @@ const useCreateNewBook = () => {
       initializationDate: '',
       finishDate: '',
       pagesRead: 0,
-      notes: [{ title: '', note: '' }],
+      notes: [],
     };
     addBook(book);
   }

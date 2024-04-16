@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -10,7 +10,18 @@ import {
   Button,
   Textarea,
 } from '@chakra-ui/react';
-const NotesPanel = ({ isOpen, onClose }) => {
+import { useSearchContext } from '../../contexts/SearchContextProvider';
+
+const NotesPanel = ({ isOpen, onClose, notes, bookId }) => {
+  console.log(notes);
+  const [textAreaValue, setTextAreaValue] = useState('');
+  const { saveNote } = useSearchContext();
+  const handleChangeTextArea = (e) => {
+    setTextAreaValue(e.target.value);
+  };
+  const handleSaveNote = () => {
+    saveNote(textAreaValue, bookId);
+  };
   return (
     <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='scale'>
       <ModalOverlay />
@@ -18,13 +29,19 @@ const NotesPanel = ({ isOpen, onClose }) => {
         <ModalHeader>Notas sobre este libro</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Textarea />
+          <Textarea onChange={handleChangeTextArea} />
+          Mis notas:
+          {notes?.map((e, i) => (
+            <p key={i}>{e}</p>
+          ))}
         </ModalBody>
         <ModalFooter>
           <Button colorScheme='blue' mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant='ghost'>Guardar Nota</Button>
+          <Button variant='ghost' onClick={handleSaveNote}>
+            Guardar Nota
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
