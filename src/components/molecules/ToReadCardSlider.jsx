@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Flex, Text, Box, Button, Tooltip } from '@chakra-ui/react';
-import { AttachmentIcon } from '@chakra-ui/icons';
+import { AttachmentIcon, DeleteIcon } from '@chakra-ui/icons';
 import NotesPanel from '../molecules/NotesPanel';
 import { useDisclosure } from '@chakra-ui/react';
+import { useSearchContext } from '../../contexts/SearchContextProvider';
 
 const Arrow = ({ direction, onClick }) => (
   <Box
@@ -33,6 +34,7 @@ const Dot = ({ active, onClick }) => (
 );
 
 const ToReadCardSlider = ({ books, changeState }) => {
+  const { removeBook } = useSearchContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -52,6 +54,9 @@ const ToReadCardSlider = ({ books, changeState }) => {
   const changeBookState = () => {
     changeState(books[currentIndex].id);
     setCurrentIndex(0);
+  };
+  const deleteBook = () => {
+    removeBook(books[currentIndex].id);
   };
 
   const slideStylesWidthBackground = books[currentIndex]?.imgUrl;
@@ -90,14 +95,27 @@ const ToReadCardSlider = ({ books, changeState }) => {
             <br />
             Recomendado el: {recommendationDate}{' '}
           </Text>
-
-          <Button
-            justifySelf={'flex-end'}
-            w={'130px'}
-            onClick={changeBookState}
+          <Flex
+            justifyContent={'space-between'}
+            alignContent={'center'}
+            w={'100%'}
           >
-            Comenzar a leer
-          </Button>
+            <Button
+              justifySelf={'flex-end'}
+              w={'130px'}
+              onClick={changeBookState}
+            >
+              Comenzar a leer
+            </Button>
+            <Tooltip label='Eliminar' fontSize='md'>
+              <DeleteIcon
+                boxSize={8}
+                cursor={'pointer'}
+                _hover={{ color: 'black' }}
+                onClick={deleteBook}
+              />
+            </Tooltip>
+          </Flex>
         </Flex>
 
         <Arrow direction='right' onClick={goToNext} />
@@ -114,7 +132,7 @@ const ToReadCardSlider = ({ books, changeState }) => {
       <NotesPanel
         isOpen={isOpen}
         onClose={onClose}
-        notes={books[currentIndex].notes}
+        notes={books[currentIndex]?.notes}
         bookId={books[currentIndex].id}
       />
     </Flex>

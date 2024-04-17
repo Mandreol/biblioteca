@@ -9,8 +9,9 @@ export function SearchContextProvider(props) {
     setBooks([...books, newBook]);
   };
 
-  const removeBook = (index) => {
+  const removeBook = (id) => {
     const updatedBooks = [...books];
+    const index = updatedBooks.findIndex((e) => e.id === id);
     updatedBooks.splice(index, 1);
     setBooks(updatedBooks);
   };

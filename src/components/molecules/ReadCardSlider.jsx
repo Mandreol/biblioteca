@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Flex, Text, Box, Tooltip } from '@chakra-ui/react';
-import { AttachmentIcon } from '@chakra-ui/icons';
+import { AttachmentIcon, DeleteIcon } from '@chakra-ui/icons';
 import NotesPanel from '../molecules/NotesPanel';
 import { useDisclosure } from '@chakra-ui/react';
+import { useSearchContext } from '../../contexts/SearchContextProvider';
 const Arrow = ({ direction, onClick }) => (
   <Box
     fontSize='45px'
@@ -34,7 +35,7 @@ const Dot = ({ active, onClick }) => (
 const ReadCardSlider = ({ books }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const { removeBook } = useSearchContext();
   const goToPrevious = () => {
     const newIndex = currentIndex === 0 ? books.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
@@ -47,6 +48,9 @@ const ReadCardSlider = ({ books }) => {
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
+  };
+  const deleteBook = () => {
+    removeBook(books[currentIndex].id);
   };
 
   const slideStylesWidthBackground = books[currentIndex]?.imgUrl;
@@ -82,7 +86,14 @@ const ReadCardSlider = ({ books }) => {
           <Text wordBreak={'break-word'}>Iniciado el: {startDate}</Text>
           <Text wordBreak={'break-word'}>Terminado el: {finishDate}</Text>
         </Flex>
-
+        <Tooltip label='Eliminar' fontSize='md'>
+          <DeleteIcon
+            boxSize={8}
+            cursor={'pointer'}
+            _hover={{ color: 'black' }}
+            onClick={deleteBook}
+          />
+        </Tooltip>
         <Arrow direction='right' onClick={goToNext} />
       </Flex>
       <Flex justifyContent='center'>

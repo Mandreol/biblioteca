@@ -9,7 +9,8 @@ import {
 } from '@chakra-ui/react';
 import NotesPanel from '../molecules/NotesPanel';
 import { useDisclosure } from '@chakra-ui/react';
-import { AttachmentIcon } from '@chakra-ui/icons';
+import { AttachmentIcon, DeleteIcon } from '@chakra-ui/icons';
+import { useSearchContext } from '../../contexts/SearchContextProvider';
 const Arrow = ({ direction, onClick }) => (
   <Box
     fontSize='45px'
@@ -41,7 +42,7 @@ const Dot = ({ active, onClick }) => (
 const ReadingCardSlider = ({ books, changeState, setPages }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const { removeBook } = useSearchContext();
   const [pagesValue, setPagesValue] = useState(books[currentIndex].pagesRead);
   const goToPrevious = () => {
     const newIndex = currentIndex === 0 ? books.length - 1 : currentIndex - 1;
@@ -63,9 +64,11 @@ const ReadingCardSlider = ({ books, changeState, setPages }) => {
     setCurrentIndex(0);
   };
   const handleSetPages = (e) => {
-    console.log(e);
     setPages(e, books[currentIndex].id);
     setPagesValue(e);
+  };
+  const deleteBook = () => {
+    removeBook(books[currentIndex].id);
   };
 
   const slideStylesWidthBackground = books[currentIndex]?.imgUrl;
@@ -120,10 +123,27 @@ const ReadingCardSlider = ({ books, changeState, setPages }) => {
               </NumberInput>
             }
           </Flex>
-
-          <Button w={'140px'} onClick={changeBookState}>
-            libro terminado!!!
-          </Button>
+          <Flex
+            justifyContent={'space-between'}
+            alignContent={'center'}
+            w={'100%'}
+          >
+            <Button
+              justifySelf={'flex-end'}
+              w={'150px'}
+              onClick={changeBookState}
+            >
+              Libro terminado!!!
+            </Button>
+            <Tooltip label='Eliminar' fontSize='md'>
+              <DeleteIcon
+                boxSize={8}
+                cursor={'pointer'}
+                _hover={{ color: 'black' }}
+                onClick={deleteBook}
+              />
+            </Tooltip>
+          </Flex>
         </Flex>
 
         <Arrow direction='right' onClick={goToNext} />
