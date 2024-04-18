@@ -13,7 +13,6 @@ import {
 import { useSearchContext } from '../../contexts/SearchContextProvider';
 
 const NotesPanel = ({ isOpen, onClose, notes, bookId }) => {
-  console.log(notes);
   const [textAreaValue, setTextAreaValue] = useState('');
   const { saveNote } = useSearchContext();
   const handleChangeTextArea = (e) => {

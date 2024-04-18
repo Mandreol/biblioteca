@@ -120,7 +120,13 @@ const ToReadCardSlider = ({ books, changeState }) => {
 
         <Arrow direction='right' onClick={goToNext} />
       </Flex>
-      <Flex justifyContent='center'>
+      <Flex
+        width={'85%'}
+        justifyContent='center'
+        overflow={'hidden'}
+        marginRight={'5%'}
+        marginLeft={'5%'}
+      >
         {books.map((_, index) => (
           <Dot
             key={index}
