@@ -7,7 +7,6 @@ const useCreateNewBook = () => {
   const { books } = useSearchContext();
 
   function createNewBook(bookData) {
-    console.log(bookData);
     const comprovation = books.some((objeto) => objeto.id === bookData.cover_i);
     const book = {
       id: bookData.cover_i,
