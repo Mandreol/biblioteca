@@ -3,7 +3,7 @@ import SuggestionCard from '../molecules/SuggestionCard';
 import SuggestionsList from '../molecules/SuggestionsList';
 import { useState, useRef } from 'react';
 import useUrlConstructor from '../../hooks/useUrlConstructor';
-import useSearchApiData from '../../hooks/useSearchApiData';
+import useSearchApiData from '../../hooks/useFilterData';
 import useFetch from '../../hooks/useFetch';
 import { Flex, Box, Text, CircularProgress } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react-use-disclosure';

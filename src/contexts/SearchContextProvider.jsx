@@ -4,7 +4,7 @@ import useCurrentDate from '../hooks/useCurrentDate';
 
 export function SearchContextProvider(props) {
   const [books, setBooks] = useState([]);
-  const { currentDate } = useCurrentDate();
+
   const addBook = (newBook) => {
     setBooks([...books, newBook]);
   };
@@ -16,7 +16,7 @@ export function SearchContextProvider(props) {
     setBooks(updatedBooks);
   };
   const changeState = (id) => {
-    const startDate = currentDate;
+    const startDate = useCurrentDate();
     setBooks((prevBooks) => {
       const updatedBooks = [...prevBooks];
       const index = updatedBooks.findIndex((e) => e.id === id);

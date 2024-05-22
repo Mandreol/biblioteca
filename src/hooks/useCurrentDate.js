@@ -9,5 +9,5 @@ export default function useCurrentDate() {
 
   let currentDate = getCurrentDate();
 
-  return { currentDate };
+  return currentDate;
 }

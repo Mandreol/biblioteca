@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+const URL_BASE = 'https://readinglist-backend.onrender.com/';
 
-const useApi = (URL) => {
+const useGetAllBooks = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
   useEffect(() => {
-    if (!URL) {
-      setError('URL missing');
-      return;
-    }
-
-    const fetchData = async () => {
+    const fetchApi = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(URL);
+        const res = await axios.get(
+          'https://readinglist-backend.onrender.com/books/'
+        );
         setData(res.data);
       } catch (error) {
         setError(
@@ -28,7 +26,7 @@ const useApi = (URL) => {
       }
     };
 
-    fetchData();
+    fetchApi();
 
     return () => {
       setData(null);
@@ -40,4 +38,4 @@ const useApi = (URL) => {
   return [data, error, loading];
 };
 
-export default useApi;
+export default useGetAllBooks;

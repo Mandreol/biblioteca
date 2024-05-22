@@ -2,13 +2,12 @@ import useCurrentDate from './useCurrentDate';
 import { useSearchContext } from '../contexts/SearchContextProvider';
 
 const useCreateNewBook = () => {
-  const { addBook } = useSearchContext();
+  const { addBook, books } = useSearchContext(); // Desestructura ambas propiedades de una sola llamada
   const { currentDate } = useCurrentDate();
-  const { books } = useSearchContext();
 
   function createNewBook(bookData) {
-    const comprovation = books.some((objeto) => objeto.id === bookData.cover_i);
-    const book = {
+    const bookExists = books.some((objeto) => objeto.id === bookData.cover_i); // Renombrar comprobación
+    const newBook = {
       id: bookData.cover_i,
       title: bookData.title,
       author: bookData?.author_name?.length ? bookData.author_name[0] : '',
@@ -20,14 +19,16 @@ const useCreateNewBook = () => {
       pagesRead: 0,
       notes: [],
     };
-    if (!comprovation) {
-      addBook(book);
+
+    if (!bookExists) {
+      addBook(newBook);
+      return newBook;
     } else {
-      return 'el libro ya exise';
+      return 'El libro ya existe';
     }
   }
 
-  return { createNewBook };
+  return createNewBook;
 };
 
 export default useCreateNewBook;

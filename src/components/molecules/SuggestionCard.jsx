@@ -1,3 +1,4 @@
+import React from 'react';
 import Img from '../atoms/Img';
 import useCreateNewBook from '../../hooks/useCreateNewBook';
 import {
@@ -10,11 +11,16 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
+import useSaveNewBook from '../../hooks/backEndApiFucntions/useSaveNewBook';
 
 const SuggestionCard = ({ selectData, isOpen, onClose }) => {
-  const { createNewBook } = useCreateNewBook();
+  const createNewBook = useCreateNewBook();
+  const newBook = createNewBook(selectData);
+  const { saveBook, error, loading } = useSaveNewBook();
+
   const saveData = () => {
-    createNewBook(selectData);
+    console.log(newBook);
+    saveBook(newBook);
     onClose();
   };
 
@@ -31,7 +37,7 @@ const SuggestionCard = ({ selectData, isOpen, onClose }) => {
         </ModalBody>
         <ModalFooter>
           <Button onClick={onClose}>Volver a la lista</Button>
-          <Button onClick={saveData} variant='ghost'>
+          <Button onClick={saveData} variant='ghost' isLoading={loading}>
             Agregar a lista de lectura
           </Button>
         </ModalFooter>
